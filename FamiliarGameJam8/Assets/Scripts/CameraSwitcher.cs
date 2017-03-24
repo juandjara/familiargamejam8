@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class CameraSwitcher : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public Camera leftCamera;
+    public Camera rightCamera;
+
+    public void ShowOverheadView() {
+        leftCamera.enabled = false;
+        rightCamera.enabled = true;
+    }
+    
+    public void ShowFirstPersonView() {
+        leftCamera.enabled = true;
+        rightCamera.enabled = false;
+    }
 }
