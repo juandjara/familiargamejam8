@@ -25,6 +25,12 @@ public class EventManager : MonoBehaviour {
 	}
 
 	private void _triggerEvent(int index) {
-		
+		switch(index) {
+			case 0:
+				TextManager.instance.muestraMensaje("Se escucha un crujido en la cocina");
+				return;
+			default:
+				return;
+		}
 	}
 }
