@@ -16,13 +16,13 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float turnValue = Input.GetAxis("Horizontal");
-		float zAxis = Input.GetAxis("Vertical");
-		movement(zAxis);
+		float xAxis = Input.GetAxis("Vertical");
+		movement(xAxis);
 		turn(turnValue);
 	}
 
-	void movement(float zAxis) {
-		Vector3 movement = new Vector3(0, 0, zAxis) * moveSpeed * Time.deltaTime;
+	void movement(float xAxis) {
+		Vector3 movement = new Vector3(xAxis, 0, 0) * moveSpeed * Time.deltaTime;
 		playerTransform.Translate(movement);				
 	}
 
