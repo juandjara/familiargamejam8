@@ -19,7 +19,7 @@ ExportedObj/
 *.svd
 
 # Visual Studio Code
-.vscode
+.vscode/
 
 # Unity3D generated meta files
 *.pidb.meta
