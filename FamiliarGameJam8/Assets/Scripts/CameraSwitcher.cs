@@ -21,7 +21,7 @@ public class CameraSwitcher : MonoBehaviour {
 			Debug.LogError("Invalid index. This camera does not exist");
 			return;
 		}
-		TextManager.instance.muestraMensaje("mostrando camara "+targetIndex);
+		//TextManager.instance.muestraMensaje("mostrando camara "+targetIndex);
 		for(int index = 0; index < cameras.Length; index++) {
 			Camera cam = cameras[index];
 			if(index == targetIndex) {
