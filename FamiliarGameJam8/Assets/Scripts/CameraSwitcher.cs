@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraSwitcher : MonoBehaviour {
 
 	public Camera[] cameras;
-	public static CameraSwitcher instance;
+	public static CameraSwitcher instance { get; private set; }
 
 	void Awake() {
 		if(instance == null) {
