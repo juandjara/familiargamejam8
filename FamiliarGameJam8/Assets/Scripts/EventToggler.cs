@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EventToggler : MonoBehaviour {
 
-	public int eventIndex;
+	public int eventIndex = 0;
 
 	/// <summary>
 	/// OnTriggerEnter is called when the Collider other enters the trigger.
