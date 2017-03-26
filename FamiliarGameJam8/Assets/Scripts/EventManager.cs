@@ -16,6 +16,9 @@ public class EventManager : MonoBehaviour {
 	public Transform player;
 
 	public AudioSource audioPlatos;
+	public AudioSource audioLlantoBebe;
+	public AudioSource audioAgua;
+	public AudioSource audioBebe2;
 
 	void Awake() {
 		if(instance == null) {
@@ -44,11 +47,6 @@ public class EventManager : MonoBehaviour {
 		string msg = "";
 		float velMensaje = TextManager.instance.velocidadMensaje;
 		switch(index) {
-			// cómo mostar dos textos:
-			//   como en un rpg
-			//   se muestra el primer textos
-			//   y cuando el jugador pulse espacio
-			//   se pulsa el segundo
 			case 0:
 				audioPlatos.Play();
 				TextManager.instance.muestraMensaje("Eso venía de la cocina. Joder, ¿qué se habra roto?");
@@ -59,8 +57,8 @@ public class EventManager : MonoBehaviour {
 				horizontalAxis = "Vertical";
 				verticalAxis = "Horizontal";
 				// TODO: se apagan las luces
-				// y despues suena el bebe llorando
 				yield return new WaitForSeconds(1f + (msg.Length * velMensaje));
+				audioLlantoBebe.Play();
 				TextManager.instance.muestraMensaje("Tendré que comprobar el cuadro de luces en el pasillo");				
 				break;
 			case 2:
@@ -79,7 +77,9 @@ public class EventManager : MonoBehaviour {
 				horizontalAxis = "Horizontal2";
 				verticalAxis = "Vertical2";
 				// mostrar imagen de niño fantasma en la entrada del pasillo durante medio segundo
-				// reproducir sonido fuerte de grifo abiero
+				
+				audioAgua.Play();
+
 				yield return new WaitForSeconds(1f + (msg.Length * velMensaje));
 				TextManager.instance.muestraMensaje("¿Me he dejado la ducha abierta?");				
 				break;
@@ -98,11 +98,14 @@ public class EventManager : MonoBehaviour {
 				// TODO: cerrar puerta al salon
 				break;				
 			case 5:
+
+				audioBebe2.Play();
+
 				// llegamos al cuarto del niño y fin del juego
 				// el padre ve el diario del niño y afronta su muerte
 				// y recuerda como le molestaba que él bebiera
 				// FIN DEL JUEGO
-				TextManager.instance.muestraMensaje("Hijo mio, my son");				
+				TextManager.instance.muestraMensaje("Hijo mio");				
 				break;
 			default:
 				break;
