@@ -19,6 +19,16 @@ public class EventManager : MonoBehaviour {
 	public AudioSource audioLlantoBebe;
 	public AudioSource audioAgua;
 	public AudioSource audioBebe2;
+	public AudioSource audioRisaBebe;
+
+	public Transform luces;
+
+	public Texture intro;
+
+	public GameObject videoPlayer;
+
+	public MovieTexture movie_ducha;
+	public MovieTexture movie_fin;
 
 	void Awake() {
 		if(instance == null) {
@@ -56,18 +66,26 @@ public class EventManager : MonoBehaviour {
 				TextManager.instance.muestraMensaje(msg);
 				horizontalAxis = "Vertical";
 				verticalAxis = "Horizontal";
-				// TODO: se apagan las luces
 				yield return new WaitForSeconds(1f + (msg.Length * velMensaje));
+				// TODO: se apagan las luces
+
+				GameObject[] luces = GameObject.FindGameObjectsWithTag("Luz");
+				foreach(GameObject luz in luces) {
+					luz.GetComponent<Light>().enabled = false;
+				}
+
 				audioLlantoBebe.Play();
+				audioRisaBebe.Play();
+
 				TextManager.instance.muestraMensaje("Tendré que comprobar el cuadro de luces en el pasillo");				
 				break;
 			case 2:
 				msg = "Uff, se ha fundido, lo que me faltaba. Este dia no va a acabar nunca.";
 				TextManager.instance.muestraMensaje(msg);
-				// TODO: Mostrar sombra en el cuarto del niño,
-				//   que se vea desde el pasillo con un objeto dentro de la habitacion
+				
 				// TODO: reproducir sonido del corazon latiendo
 				//   que se quede sonando durante el juego
+				
 				yield return new WaitForSeconds(1f + (msg.Length * velMensaje));
 				TextManager.instance.muestraMensaje("Tendré que ir al salón a por velas.");				
 				break;
@@ -89,6 +107,8 @@ public class EventManager : MonoBehaviour {
 				horizontalAxis = "Horizontal2";
 				verticalAxis = "Vertical2";
 
+				videoPlayer.GetComponent<VideoPlayer>().PlayVideo(movie_ducha);
+
 				Vector3 position = new Vector3(-1f, 0f, -0.8f);
 				player.position = position;
 				CameraSwitcher.instance.enableCamera(1);
@@ -105,7 +125,10 @@ public class EventManager : MonoBehaviour {
 				// el padre ve el diario del niño y afronta su muerte
 				// y recuerda como le molestaba que él bebiera
 				// FIN DEL JUEGO
-				TextManager.instance.muestraMensaje("Hijo mio");				
+				TextManager.instance.muestraMensaje("Este cuento se acabo");
+
+				videoPlayer.GetComponent<VideoPlayer>().PlayVideo(movie_fin);
+
 				break;
 			default:
 				break;
