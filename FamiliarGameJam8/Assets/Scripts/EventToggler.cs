@@ -14,7 +14,7 @@ public class EventToggler : MonoBehaviour {
 	/// </summary>
 	void Start()
 	{
-		renderer = GetComponent<MeshRenderer>();
+		renderer = this.transform.GetChild(0).GetComponent<MeshRenderer>();
 	}
 
 	/// <summary>
