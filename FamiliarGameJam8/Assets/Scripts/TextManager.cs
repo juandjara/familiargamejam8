@@ -25,6 +25,14 @@ public class TextManager : MonoBehaviour {
 		DontDestroyOnLoad(this.gameObject);
 	}
 	
+	/// <summary>
+	/// Start is called on the frame when a script is enabled just before
+	/// any of the Update methods is called the first time.
+	/// </summary>
+	void Start() {
+		muestraMensaje("Ha sido el dia mas duro de mi vida. Necesito irme a dormir");
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey (KeyCode.Space)) {

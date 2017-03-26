@@ -18,6 +18,14 @@ public class PlayerController : MonoBehaviour {
 		float turnValue = Input.GetAxis("Horizontal");
 		float xAxis = Input.GetAxis("Vertical");
 
+		if(EventManager.instance.invierteGiro) {
+			turnValue = turnValue * -1;
+		}
+
+		if(EventManager.instance.invierteMove) {
+			xAxis = xAxis * -1;
+		}
+
 		turn(turnValue);
 		
 		Ray ray = new Ray(transform.position+transform.right*0.8f, transform.right*xAxis);
