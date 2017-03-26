@@ -15,6 +15,8 @@ public class EventManager : MonoBehaviour {
 
 	public Transform player;
 
+	public AudioSource audioPlatos;
+
 	void Awake() {
 		if(instance == null) {
 			instance = this;
@@ -48,7 +50,7 @@ public class EventManager : MonoBehaviour {
 			//   y cuando el jugador pulse espacio
 			//   se pulsa el segundo
 			case 0:
-				// TODO: suena la vajilla fuerte
+				audioPlatos.Play();
 				TextManager.instance.muestraMensaje("Eso venía de la cocina. Joder, ¿qué se habra roto?");
 				break;
 			case 1:
