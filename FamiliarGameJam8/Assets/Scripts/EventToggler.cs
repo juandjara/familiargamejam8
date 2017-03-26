@@ -6,7 +6,7 @@ public class EventToggler : MonoBehaviour {
 
 	public int eventIndex = 0;
 
-	private MeshRenderer renderer;
+	private MeshRenderer childRenderer;
 
 	/// <summary>
 	/// Start is called on the frame when a script is enabled just before
@@ -14,7 +14,7 @@ public class EventToggler : MonoBehaviour {
 	/// </summary>
 	void Start()
 	{
-		renderer = this.transform.GetChild(0).GetComponent<MeshRenderer>();
+		childRenderer = this.transform.GetChild(0).GetComponent<MeshRenderer>();
 	}
 
 	/// <summary>
@@ -23,9 +23,9 @@ public class EventToggler : MonoBehaviour {
 	void Update()
 	{
 		if(EventManager.instance.eventCounter == eventIndex) {
-			renderer.enabled = true;
+			childRenderer.enabled = true;
 		} else {
-			renderer.enabled = false;
+			childRenderer.enabled = false;
 		}
 	}
 
