@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float turnValue = Input.GetAxis("Horizontal");
-		float xAxis = Input.GetAxis("Vertical");
+		float turnValue = Input.GetAxis(EventManager.instance.horizontalAxis);
+		float xAxis = Input.GetAxis(EventManager.instance.verticalAxis);
 
 		if(EventManager.instance.invierteGiro) {
 			turnValue = turnValue * -1;

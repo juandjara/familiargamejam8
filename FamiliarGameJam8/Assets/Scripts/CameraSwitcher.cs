@@ -26,8 +26,10 @@ public class CameraSwitcher : MonoBehaviour {
 			Camera cam = cameras[index];
 			if(index == targetIndex) {
 				cam.enabled = true;
+				cam.gameObject.GetComponent<AudioListener>().enabled = true;
 			} else {
 				cam.enabled = false;
+				cam.gameObject.GetComponent<AudioListener>().enabled = false;
 			}
 		}
 	}

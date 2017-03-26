@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class TextManager : MonoBehaviour {
 
 	bool mostrandoMensaje = false;
-	float velocidadMensaje;
 	float velocidadMensajeRapido = 0.03f;
 	float velocidadMensajeLento = 0.06f;
+	AudioSource keySound;
 
+	public float velocidadMensaje;
 	public Text targetText;
 	public static TextManager instance;
 
@@ -30,6 +31,7 @@ public class TextManager : MonoBehaviour {
 	/// any of the Update methods is called the first time.
 	/// </summary>
 	void Start() {
+		keySound = GetComponent<AudioSource>();
 		muestraMensaje("Ha sido el dia mas duro de mi vida. Necesito irme a dormir");
 	}
 
@@ -47,6 +49,7 @@ public class TextManager : MonoBehaviour {
 	}
 
 	public void muestraMensaje(string mensaje) {
+		keySound.Play();
 		StartCoroutine (muestraMensajeInterno (mensaje));
 	}
 
@@ -54,7 +57,6 @@ public class TextManager : MonoBehaviour {
 		targetText.text = "";
 		for (int i = 0; i < mensaje.Length; i++) {
 			targetText.text += mensaje[i];
-			//TODO ejecutar sonido de tecla
 			yield return new WaitForSeconds (velocidadMensaje);
 		}
 		mostrandoMensaje = false;

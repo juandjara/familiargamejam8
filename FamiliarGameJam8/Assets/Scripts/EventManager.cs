@@ -10,6 +10,11 @@ public class EventManager : MonoBehaviour {
 	public bool invierteMove = false;
 	public bool invierteGiro = false;
 
+	public string horizontalAxis = "Horizontal";
+	public string verticalAxis = "Vertical";
+
+	public Transform player;
+
 	void Awake() {
 		if(instance == null) {
 			instance = this;
@@ -34,45 +39,57 @@ public class EventManager : MonoBehaviour {
 	}
  
 	IEnumerator _triggerEvent(int index) {
+		string msg = "";
+		float velMensaje = TextManager.instance.velocidadMensaje;
 		switch(index) {
-			// como mostar dos textos
-			// como en un rpg
-			// se muestra el primer textos
-			// y cuando el jugador pulse espacio
-			// se pulsa el segundo
+			// cómo mostar dos textos:
+			//   como en un rpg
+			//   se muestra el primer textos
+			//   y cuando el jugador pulse espacio
+			//   se pulsa el segundo
 			case 0:
 				// TODO: suena la vajilla fuerte
-				TextManager.instance.muestraMensaje("Joder, ¿qué se habra roto? (ve hacia la cocina)");
+				TextManager.instance.muestraMensaje("Eso venía de la cocina. Joder, ¿qué se habra roto?");
 				break;
 			case 1:
-				TextManager.instance.muestraMensaje("Todo esta en su sitio. Me serviré la ultima.");
+				msg = "Todo esta en su sitio. Me serviré la ultima.";
+				TextManager.instance.muestraMensaje(msg);
+				horizontalAxis = "Vertical";
+				verticalAxis = "Horizontal";
 				// TODO: se apagan las luces
 				// y despues suena el bebe llorando
-				// TODO: esperar x tiempo para el segundo mensaje
-				yield return new WaitForSeconds(4f);
-				TextManager.instance.muestraMensaje("(El cuadro de luces esta en el pasillo)");				
+				yield return new WaitForSeconds(1f + (msg.Length * velMensaje));
+				TextManager.instance.muestraMensaje("Tendré que comprobar el cuadro de luces en el pasillo");				
 				break;
 			case 2:
-				// 
-				TextManager.instance.muestraMensaje("Uff, se ha fundido, lo que me faltaba. Este dia no va a acabar nunca.");
+				msg = "Uff, se ha fundido, lo que me faltaba. Este dia no va a acabar nunca.";
+				TextManager.instance.muestraMensaje(msg);
 				// TODO: Mostrar sombra en el cuarto del niño,
 				//   que se vea desde el pasillo con un objeto dentro de la habitacion
 				// TODO: reproducir sonido del corazon latiendo
 				//   que se quede sonando durante el juego
-				// TODO: esperar x tiempo para el segundo mensaje
-				TextManager.instance.muestraMensaje("(Las velas estan en el salon)");				
+				yield return new WaitForSeconds(1f + (msg.Length * velMensaje));
+				TextManager.instance.muestraMensaje("Tendré que ir al salón a por velas.");				
 				break;
 			case 3:
-				TextManager.instance.muestraMensaje("Hmm, Jack Daniels. Buena compañia para dormir");
+				msg = "Hmm, Jack Daniels. Buena compañia para dormir";
+				TextManager.instance.muestraMensaje(msg);
+				horizontalAxis = "Horizontal2";
+				verticalAxis = "Vertical2";
 				// mostrar imagen de niño fantasma en la entrada del pasillo durante medio segundo
 				// reproducir sonido fuerte de grifo abiero
-				// esperar x tiempo para el segundo mensaje
+				yield return new WaitForSeconds(1f + (msg.Length * velMensaje));
 				TextManager.instance.muestraMensaje("¿Me he dejado la ducha abierta?");				
 				break;
 			case 4:
 				// TODO: ponemos un video 
-				// TODO: cambia a la camara del pasillo
-				// TODO: pon al personaje en una posicion fija (x,y,z)
+				
+				horizontalAxis = "Horizontal2";
+				verticalAxis = "Vertical2";
+
+				Vector3 position = new Vector3(-1f, 0f, -0.8f);
+				player.position = position;
+				CameraSwitcher.instance.enableCamera(1);
 				TextManager.instance.muestraMensaje("¿Que coño ha sido eso?");
 				// TODO: desactivar la cortina							
 				// TODO: cerrar puerta dorm padre
@@ -83,6 +100,8 @@ public class EventManager : MonoBehaviour {
 				// el padre ve el diario del niño y afronta su muerte
 				// y recuerda como le molestaba que él bebiera
 				// FIN DEL JUEGO
+				TextManager.instance.muestraMensaje("Hijo mio, my son");				
+				break;
 			default:
 				break;
 		}
